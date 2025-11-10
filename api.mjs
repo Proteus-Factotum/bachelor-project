@@ -93,7 +93,7 @@ app.post('/api/hint', async (req,res)=>{
 // 3) auto reward (single-turn)
 app.post('/api/auto-reward', async (req,res)=>{
   try{
-    const { episode_id, target, solved=false } = req.body;
+    const { episode_id, target, solved=false, guess=null } = req.body;
     if(!episode_id || !target) return res.status(400).json({ error:'episode_id, target required' });
 
     const { data: ep, error: qErr } = await supabase.from('episodes')
@@ -109,10 +109,10 @@ app.post('/api/auto-reward', async (req,res)=>{
     else { reward = clamp(brevity(tok) + (solved?0.20:-0.20), -1, 1); tag = solved?'auto_len+solve':'auto_len'; }
 
     const { data: fb, error: fbErr } = await supabase.from('feedback')
-      .insert({ episode_id, reward, tag }).select().single();
+      .insert({ episode_id, reward, tag, guess }).select().single();
     if(fbErr) return res.status(400).json({ error: fbErr.message });
 
-    res.json({ feedback_id: fb.id, reward, tag, total_tokens: tok, didLeak });
+    res.json({ feedback_id: fb.id, reward, tag, total_tokens: tok, didLeak, guess });
   }catch(e){ res.status(500).json({ error:String(e.message||e) }); }
 });
 

@@ -39,14 +39,14 @@ for (let i=1; i<=EPISODES; i++){
 
     const t = await post('http://localhost:3000/api/hint', { episode_id, target });
     if (t.leak) {
-      await post('http://localhost:3000/api/auto-reward', { episode_id, target, solved:false });
+      await post('http://localhost:3000/api/auto-reward', { episode_id, target, solved:false, guess:null });
       continue;
     }
 
     const guess = await guessWithGPT(t.hint_text);
     const solved = ALLOWED.has(norm(guess));
 
-    await post('http://localhost:3000/api/auto-reward', { episode_id, target, solved });
+    await post('http://localhost:3000/api/auto-reward', { episode_id, target, solved, guess });
   } catch(e){
     console.error('Episode failed:', e.message || e);
   }
