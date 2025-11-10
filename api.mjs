@@ -28,7 +28,7 @@ function leaks(text, target, aliases=[]){
 // LLM hint (no history, single shot)
 async function generateHint(target){
   const body = {
-    model: 'mistral:7b',
+    model: 'mistral:latest',
     messages: [
       { role:'system', content: `Describe "${target}", without using the word "${target}"` },
       { role:'user',   content: `Target: ${target}\nWrite one short hint.` }
