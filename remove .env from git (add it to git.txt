@@ -1,0 +1,1 @@
+remove .env from git (add it to gitignore)

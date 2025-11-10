@@ -1,0 +1,7 @@
+[
+  { "id": "en-0001", "target": "book", "aliases": ["volume","tome","paperback","hardback"] },
+  { "id": "en-0002", "target": "dog",  "aliases": ["canine","pooch","hound"] },
+  { "id": "en-0003", "target": "cat",  "aliases": ["feline","kitty","tomcat"] },
+  { "id": "en-0004", "target": "car",  "aliases": ["auto","automobile","vehicle"] },
+  { "id": "en-0005", "target": "table","aliases": ["desk","workbench"] }
+]

@@ -1,0 +1,9 @@
+# Never commit secrets
+.env
+
+# Dependencies
+node_modules/
+
+# Editor/OS junk
+.DS_Store
+*.log
